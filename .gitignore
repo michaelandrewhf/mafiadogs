@@ -1,0 +1,5 @@
+__pycache__/
+node_modules/
+assets/styles.css.map
+dist/
+context.txt
