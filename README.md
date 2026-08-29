@@ -1,75 +1,112 @@
 # Máfia Dog's
 
-Landing page estática da hamburgueria Máfia Dog's.
+Landing page oficial da Máfia Dog's, criada para concentrar os canais de pedido da operação em Campo de Santana, Curitiba - PR.
 
-## Stack
+O projeto reúne em uma única página as frentes de **Pizzaria**, **Hamburgueria** e **Marmitaria**, com acesso rápido ao iFood, 99Food, cardápios online, WhatsApp e Instagram.
 
-- HTML semântico
-- Tailwind CSS
-- JavaScript vanilla
+## Site
+
+Domínio principal:
+
+- `https://mafiadogs.com.br/`
+
+Hospedagem:
+
 - GitHub Pages
+- Domínio personalizado configurado via `CNAME`
+- DNS gerenciado pela Cloudflare
 
-## Estrutura
+## Objetivo
 
-- `index.html`: página principal
-- `src/input.css`: fonte do Tailwind e utilitários customizados mínimos
-- `src/main.js`: header sticky, menu mobile, scroll reveal e ano automático
-- `assets/styles.css`: CSS compilado e pronto para o GitHub Pages servir
-- `assets/images/`: imagens da marca e dos produtos
-- `tailwind.config.js`: tema, fontes e cores da landing
-- `.nojekyll`: garante deploy estático limpo no GitHub Pages
+A página foi pensada como uma landing page mobile-first para uso principalmente em bio do Instagram, compartilhamento por WhatsApp e busca local.
 
-## Desenvolvimento local
+O conteúdo e os metadados dão prioridade a pesquisas relacionadas a:
 
-Instale as dependências:
+- Máfia Dog's Curitiba
+- Pizzaria em Curitiba
+- Hamburgueria em Curitiba
+- Marmitaria em Curitiba
+- Pizza em Campo de Santana
+- Hambúrguer em Campo de Santana
+- Marmita em Campo de Santana
 
-```bash
-npm install
+## Recursos atuais
+
+- Layout responsivo e mobile-first
+- Identidade visual baseada na paleta oficial da marca
+- Cards independentes para Pizzaria, Hamburgueria e Marmitaria
+- Fotos reais dos produtos
+- Logo e favicon próprios
+- Links para iFood, 99Food, cardápios e WhatsApp
+- Status automático de aberto/fechado conforme horário de cada operação
+- Horário calculado no fuso `America/Sao_Paulo`
+- 99Food da Pizzaria marcado como `Em breve`
+- SEO local voltado para Curitiba
+- Canonical URL para `mafiadogs.com.br`
+- Open Graph e Twitter Cards
+- Dados estruturados Schema.org em JSON-LD
+- `robots.txt`
+- `sitemap.xml`
+- GitHub Pages com domínio personalizado
+
+## Horários configurados
+
+- Marmitaria: `09:00` às `16:00`
+- Hamburgueria: `17:00` à `01:00`
+- Pizzaria: `17:00` à `01:00`
+
+Fuso utilizado no JavaScript: `America/Sao_Paulo`.
+
+## Estrutura principal
+
+```text
+.
+├── index.html
+├── CNAME
+├── robots.txt
+├── sitemap.xml
+├── .nojekyll
+├── assets/
+│   └── cards/
+│       ├── logo.png
+│       ├── favicon.png
+│       ├── pizza.jpeg
+│       ├── Hamburgueria.jpeg
+│       └── Marmitaria.jpeg
+└── README.md
 ```
 
-Rode o watcher do Tailwind:
+O site atualmente é servido diretamente pelo `index.html`; não depende de build para funcionar no GitHub Pages.
 
-```bash
-npm run dev
-```
+## SEO e busca local
 
-Para visualizar localmente em um servidor estático:
+O `index.html` contém:
 
-```bash
-npm run preview
-```
+- título e descrição focados em Curitiba
+- `meta robots` e `googlebot`
+- URL canônica
+- localização `BR-PR / Curitiba`
+- Open Graph
+- Twitter Card
+- JSON-LD com as três operações da marca
+- endereço em Campo de Santana
+- telefones, horários, imagens e cardápios estruturados
 
-## Build
+O `robots.txt` libera a indexação e informa o caminho do sitemap. O `sitemap.xml` usa o domínio oficial como URL canônica.
 
-Gere o CSS final:
+## Contatos e localização
 
-```bash
-npm run build
-```
-
-O arquivo gerado fica em `assets/styles.css`.
-
-## Deploy no GitHub Pages
-
-
-Arquivos essenciais para o deploy:
-
-- `index.html`
-- `assets/styles.css`
-- `src/main.js`
-- `assets/images/`
-- `.nojekyll`
-
-## Personalização
-
-- Textos, links e SEO: `index.html`
-- Cores, componentes e pequenos utilitários: `src/input.css`
-- Interações: `src/main.js`
-- Imagens: `assets/images/`
-
-## Contatos configurados
-
-- WhatsApp: `(41) 98779-3052`
 - Instagram: `@mafiadogs1`
-- Cardápio online: `pedido.brendi.com.br/mafia-dogs-campo-de-santana`
+- Pizzaria: `(41) 99623-4376`
+- Hamburgueria e Marmitaria: `(41) 98779-3052`
 - Endereço: `R. Marcos Bertoldi, 116 - Campo de Santana, Curitiba - PR`
+
+## Deploy
+
+O deploy é feito automaticamente pelo GitHub Pages a partir da branch `main`.
+
+Alterações no `index.html`, imagens, `robots.txt`, `sitemap.xml` ou demais arquivos publicados entram no próximo deploy do Pages.
+
+## Observação
+
+Arquivos antigos de Tailwind/npm ainda podem existir no histórico ou na estrutura do repositório, mas a versão atual da landing page utiliza CSS e JavaScript diretamente no `index.html`, reduzindo dependências para publicação.
