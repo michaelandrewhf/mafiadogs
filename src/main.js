@@ -1,80 +1,56 @@
-const header = document.querySelector("[data-header]");
-const menu = document.querySelector("[data-menu]");
-const menuToggle = document.querySelector("[data-menu-toggle]");
-const currentYear = document.querySelector("[data-current-year]");
-const revealElements = document.querySelectorAll(".reveal");
-const menuLinks = menu ? menu.querySelectorAll("a") : [];
-const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+(() => {
+  const minutesInSaoPaulo = () => {
+    const parts = new Intl.DateTimeFormat('pt-BR', {
+      timeZone: 'America/Sao_Paulo',
+      hour: '2-digit',
+      minute: '2-digit',
+      hourCycle: 'h23',
+    }).formatToParts(new Date());
 
-const setHeaderState = () => {
-  if (!header) return;
-  header.classList.toggle("is-scrolled", window.scrollY > 12);
-};
+    const hour = Number(parts.find((part) => part.type === 'hour').value);
+    const minute = Number(parts.find((part) => part.type === 'minute').value);
 
-const closeMenu = () => {
-  if (!menu || !menuToggle) return;
-  menu.classList.add("hidden");
-  menuToggle.setAttribute("aria-expanded", "false");
-  document.body.classList.remove("nav-open");
-};
+    return hour * 60 + minute;
+  };
 
-const toggleMenu = () => {
-  if (!menu || !menuToggle) return;
-  const isOpen = menu.classList.contains("hidden");
-
-  if (isOpen) {
-    menu.classList.remove("hidden");
-    menuToggle.setAttribute("aria-expanded", "true");
-    document.body.classList.add("nav-open");
-    return;
-  }
-
-  closeMenu();
-};
-
-if (currentYear) {
-  currentYear.textContent = new Date().getFullYear();
-}
-
-setHeaderState();
-window.addEventListener("scroll", setHeaderState, { passive: true });
-window.addEventListener("resize", () => {
-  if (window.innerWidth >= 1024) {
-    closeMenu();
-  }
-});
-
-if (menuToggle) {
-  menuToggle.addEventListener("click", toggleMenu);
-}
-
-menuLinks.forEach((link) => {
-  link.addEventListener("click", closeMenu);
-});
-
-window.addEventListener("keydown", (event) => {
-  if (event.key === "Escape") {
-    closeMenu();
-  }
-});
-
-if (!reduceMotion.matches && "IntersectionObserver" in window) {
-  const observer = new IntersectionObserver(
-    (entries) => {
-      entries.forEach((entry) => {
-        if (entry.isIntersecting) {
-          entry.target.classList.add("is-visible");
-          observer.unobserve(entry.target);
-        }
-      });
-    },
-    {
-      threshold: 0.18,
-      rootMargin: "0px 0px -60px 0px",
-    },
+  const isOpen = (schedule, minutes) => (
+    schedule === 'lunch'
+      ? minutes >= 540 && minutes < 960
+      : minutes >= 1020 || minutes < 60
   );
 
-  revealElements.forEach((element) => observer.observe(element));
-} else {
-  revealElements.forEach((element) => element.classList.add("is-visible"));
-}
+  const updateAvailability = () => {
+    const now = minutesInSaoPaulo();
+
+    document.querySelectorAll('[data-schedule]').forEach((card) => {
+      const open = isOpen(card.dataset.schedule, now);
+      const status = card.querySelector('[data-status]');
+
+      card.classList.toggle('closed', !open);
+      card.classList.toggle('open', open);
+
+      status.textContent = open
+        ? 'Aberto agora'
+        : card.dataset.store === 'marmita'
+          ? 'Fechado • abre às 09h'
+          : 'Fechado • abre às 17h';
+
+      card.querySelectorAll('[data-order]').forEach((link) => {
+        if (!link.dataset.url) {
+          link.dataset.url = link.href;
+        }
+
+        if (open) {
+          link.href = link.dataset.url;
+          link.removeAttribute('aria-disabled');
+        } else {
+          link.removeAttribute('href');
+          link.setAttribute('aria-disabled', 'true');
+        }
+      });
+    });
+  };
+
+  updateAvailability();
+  setInterval(updateAvailability, 60000);
+})();
