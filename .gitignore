@@ -1,5 +1,5 @@
-__pycache__/
-node_modules/
-assets/styles.css.map
-dist/
-context.txt
+# Arquivos locais do sistema operacional e editores
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
