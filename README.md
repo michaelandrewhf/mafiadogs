@@ -51,9 +51,9 @@ O conteúdo e os metadados dão prioridade a pesquisas relacionadas a:
 
 ## Horários configurados
 
-- Marmitaria: `09:00` às `16:00`
-- Hamburgueria: `17:00` à `01:00`
-- Pizzaria: `17:00` à `01:00`
+- Marmitaria: `11:00` às `15:00`
+- Pizzaria: `18:00` às `23:30`
+- Hamburgueria: `19:00` às `23:30`
 
 Fuso utilizado no JavaScript: `America/Sao_Paulo`.
 
