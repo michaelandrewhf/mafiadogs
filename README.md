@@ -57,21 +57,7 @@ O conteúdo e os metadados dão prioridade a pesquisas relacionadas a:
 
 Fuso utilizado no JavaScript: `America/Sao_Paulo`.
 
-## Arquitetura atual
-
-O projeto foi mantido propositalmente simples e sem dependência de build para produção.
-
-As responsabilidades estão separadas da seguinte forma:
-
-- `index.html`: estrutura semântica, conteúdo, metadados SEO e JSON-LD
-- `assets/styles.css`: todo o visual e comportamento responsivo
-- `src/main.js`: lógica de disponibilidade das operações e atualização automática dos cards
-- `assets/cards/`: logo, favicon e fotos usadas na landing page
-- `robots.txt`: regras de rastreamento
-- `sitemap.xml`: URL principal para mecanismos de busca
-- `CNAME`: domínio personalizado do GitHub Pages
-
-### Estrutura principal
+## Estrutura principal
 
 ```text
 .
@@ -80,6 +66,7 @@ As responsabilidades estão separadas da seguinte forma:
 ├── robots.txt
 ├── sitemap.xml
 ├── .nojekyll
+├── .gitignore
 ├── assets/
 │   ├── styles.css
 │   └── cards/
@@ -93,47 +80,21 @@ As responsabilidades estão separadas da seguinte forma:
 └── README.md
 ```
 
-O GitHub Pages serve os arquivos diretamente; nenhuma compilação é necessária para publicar a versão atual.
+## Responsabilidades dos arquivos
 
-## CSS
+- `index.html`: estrutura semântica, conteúdo, metadados sociais e SEO estruturado.
+- `assets/styles.css`: identidade visual, layout, responsividade e estados visuais.
+- `src/main.js`: cálculo dos horários e controle do estado aberto/fechado dos cards.
+- `assets/cards/`: imagens utilizadas na versão publicada.
+- `robots.txt` e `sitemap.xml`: suporte à indexação pelos mecanismos de busca.
+- `CNAME`: domínio personalizado do GitHub Pages.
+- `.nojekyll`: publicação estática direta pelo GitHub Pages.
 
-Todo o estilo visual está em `assets/styles.css`.
-
-A separação foi feita sem mudança visual intencional. O CSS mantém exatamente os mesmos seletores, paleta, medidas, breakpoints, cards, estados de aberto/fechado e responsividade que existiam quando os estilos estavam embutidos no `index.html`.
-
-A paleta principal é:
-
-- Vermelho: `#93282C`
-- Verde: `#154734`
-- Creme: `#F5E1A4`
-- Fundo: `#140C0D`
-
-## JavaScript
-
-A lógica de interface está em `src/main.js`.
-
-Responsabilidades atuais:
-
-- obter o horário em `America/Sao_Paulo`
-- determinar se cada operação está aberta
-- alternar classes `open` e `closed`
-- atualizar o texto de status
-- habilitar ou desabilitar links de pedido
-- repetir a verificação a cada 60 segundos
-
-O arquivo é carregado com `defer`, portanto não bloqueia o parsing do HTML.
-
-## Tailwind CSS
-
-O projeto possui arquivos antigos relacionados ao Tailwind/npm, mas **a versão atual não depende do Tailwind para funcionar**.
-
-Para este estado do projeto, CSS tradicional foi mantido porque já existe um layout fechado e isso evita introduzir build, dependências e risco de alteração visual apenas para reorganizar responsabilidades.
-
-Esses arquivos legados podem ser removidos futuramente em uma limpeza separada, depois de confirmar que não são mais necessários para nenhuma outra versão do projeto.
+O site é estático e não depende de Node.js, npm, Tailwind ou etapa de build para funcionar.
 
 ## SEO e busca local
 
-O `index.html` mantém:
+O `index.html` contém:
 
 - título e descrição focados em Curitiba
 - `meta robots` e `googlebot`
@@ -144,8 +105,6 @@ O `index.html` mantém:
 - JSON-LD com as três operações da marca
 - endereço em Campo de Santana
 - telefones, horários, imagens e cardápios estruturados
-
-O JSON-LD permanece propositalmente no HTML, pois ele faz parte dos metadados da página e não da lógica JavaScript da interface.
 
 O `robots.txt` libera a indexação e informa o caminho do sitemap. O `sitemap.xml` usa o domínio oficial como URL canônica.
 
@@ -160,4 +119,4 @@ O `robots.txt` libera a indexação e informa o caminho do sitemap. O `sitemap.x
 
 O deploy é feito automaticamente pelo GitHub Pages a partir da branch `main`.
 
-Alterações em `index.html`, `assets/styles.css`, `src/main.js`, imagens, `robots.txt`, `sitemap.xml` ou demais arquivos publicados entram no próximo deploy do Pages.
+Alterações no `index.html`, CSS, JavaScript, imagens, `robots.txt`, `sitemap.xml` ou demais arquivos publicados entram no próximo deploy do Pages.
