@@ -1,4 +1,10 @@
 (() => {
+  const schedules = {
+    marmita: { opens: 11 * 60, closes: 15 * 60, label: '11h' },
+    burger: { opens: 19 * 60, closes: 23 * 60 + 30, label: '19h' },
+    pizza: { opens: 18 * 60, closes: 23 * 60 + 30, label: '18h' },
+  };
+
   const minutesInSaoPaulo = () => {
     const parts = new Intl.DateTimeFormat('pt-BR', {
       timeZone: 'America/Sao_Paulo',
@@ -13,17 +19,20 @@
     return hour * 60 + minute;
   };
 
-  const isOpen = (schedule, minutes) => (
-    schedule === 'lunch'
-      ? minutes >= 540 && minutes < 960
-      : minutes >= 1020 || minutes < 60
+  const isOpen = ({ opens, closes }, minutes) => (
+    opens < closes
+      ? minutes >= opens && minutes < closes
+      : minutes >= opens || minutes < closes
   );
 
   const updateAvailability = () => {
     const now = minutesInSaoPaulo();
 
-    document.querySelectorAll('[data-schedule]').forEach((card) => {
-      const open = isOpen(card.dataset.schedule, now);
+    document.querySelectorAll('[data-store]').forEach((card) => {
+      const schedule = schedules[card.dataset.store];
+      if (!schedule) return;
+
+      const open = isOpen(schedule, now);
       const status = card.querySelector('[data-status]');
 
       card.classList.toggle('closed', !open);
@@ -31,9 +40,7 @@
 
       status.textContent = open
         ? 'Aberto agora'
-        : card.dataset.store === 'marmita'
-          ? 'Fechado • abre às 09h'
-          : 'Fechado • abre às 17h';
+        : `Fechado • abre às ${schedule.label}`;
 
       card.querySelectorAll('[data-order]').forEach((link) => {
         if (!link.dataset.url) {
