@@ -29,8 +29,8 @@ a{color:inherit;text-decoration:none}
 .action span{padding-left:10px}
 .ifood{background:var(--red)}
 .ifood b{background:#fff1;font-style:italic;font-size:1.25rem}
-.food99{background:var(--green)}
-.food99 b{background:#0002}
+.food99{background:#FFDD00;color:#121212}
+.food99 b{background:#0001}
 .menu{background:var(--cream);color:var(--red);text-transform:uppercase}
 .disabled{background:#4a4a4a!important;color:#bbb!important;border-color:#777!important;pointer-events:none;filter:grayscale(1)}
 .whatsapp{min-height:56px;margin-top:12px;border:1px solid var(--cream);border-radius:16px;display:flex;align-items:center;justify-content:center;gap:8px;font-weight:800;background:#140c0dd9;text-align:center}
