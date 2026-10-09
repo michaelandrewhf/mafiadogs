@@ -2,7 +2,7 @@
 
 Landing page oficial da Máfia Dog's, criada para concentrar os canais de pedido da operação em Campo de Santana, Curitiba - PR.
 
-O projeto reúne em uma única página as frentes de **Pizzaria**, **Hamburgueria** e **Marmitaria**, com acesso rápido ao iFood, 99Food, cardápios online, WhatsApp e Instagram.
+O projeto reúne em uma única página as frentes de **Pizzaria**, **Hamburgueria** e **Marmitaria**, com acesso rápido aos cardápios próprios, WhatsApp e Instagram.
 
 ## Site
 
@@ -37,10 +37,9 @@ O conteúdo e os metadados dão prioridade a pesquisas relacionadas a:
 - Cards independentes para Pizzaria, Hamburgueria e Marmitaria
 - Fotos reais dos produtos
 - Logo e favicon próprios
-- Links para iFood, 99Food, cardápios e WhatsApp
+- Links para os cardápios próprios e WhatsApp
 - Status automático de aberto/fechado conforme horário de cada operação
 - Horário calculado no fuso `America/Sao_Paulo`
-- 99Food da Pizzaria marcado como `Em breve`
 - SEO local voltado para Curitiba
 - Canonical URL para `mafiadogs.com.br`
 - Open Graph e Twitter Cards
